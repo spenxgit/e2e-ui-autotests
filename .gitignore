@@ -1,0 +1,7 @@
+/node_modules/
+/.idea/misc.xml
+/.idea/.gitignore
+/.idea/e2e-ui-autotests.iml
+/.idea/modules.xml
+/.idea/vcs.xml
+.DS_Store
