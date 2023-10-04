@@ -1,6 +1,6 @@
-# e2e-ui-autotests
-e2e ui autotests
-
+#isntal testaffe and dependencies
 npm install
 npm i -g testcafe
+
+#run tests
 testcafe chrome tests/
