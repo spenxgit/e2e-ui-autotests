@@ -1,0 +1,71 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # build:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v2
+
+  #   - name: Build and Push Docker Image
+  #     if: github.event_name == 'push'
+  #     run: |
+  #       docker build -f .gitlab/jira-importer.Dockerfile -t ${{ env.JIRA_IMPORTER_DOCKER_IMAGE }} .
+  #       docker push ${{ env.JIRA_IMPORTER_DOCKER_IMAGE }}
+  #     env:
+  #       JIRA_IMPORTER_DOCKER_IMAGE: ${{ secrets.JIRA_IMPORTER_DOCKER_IMAGE }}
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
+    - name: Run TestCafe Tests
+      uses: DevExpress/testcafe-action@latest
+      with:
+        args: chromium:headless tests/**/* -s takeOnFails=true --reporter json:report.json,list --hostname localhost --skip-js-errors
+
+    - name: Upload test artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-artifacts
+        path: |
+          screenshots
+          report.json
+
+  # export:
+  #   runs-on: ubuntu-latest
+
+  #   needs:
+  #     - build
+  #     - test
+
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v2
+
+  #   - name: Set up Node.js
+  #     uses: actions/setup-node@v2
+  #     with:
+  #       node-version: 14
+
+  #   - name: Set CI_BUILDS_DIR
+  #     run: echo "CI_BUILDS_DIR=$(pwd)" >> $GITHUB_ENV
+
+  #   - name: Run export to Jira
+  #     run: node /app/app.js
+  #     env:
+  #       CI_BUILDS_DIR: ${{ env.CI_BUILDS_DIR }}
