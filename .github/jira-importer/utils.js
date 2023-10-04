@@ -160,43 +160,12 @@ function getOsType() {
 }
 
 async function getBackendVersion(backendVersionUrl) {
-  return new Promise((resolve, reject) => {
-    Request.get( {
-      uri: backendVersionUrl,
-    }, (error, response, body) => {
-      if (error)
-        reject(error);
-
-      resolve(JSON.parse(body).Version);
-    });
-  });
+  return "v0.1.0"
 }
 
 // Guys sorry for this shitcoding.
 async function getFrontendVersion(frontendVersionUrl) {
-  const versionRe = /VUE_APP_VERSION:"\s*(.*?)\s*",/g
-  const hashRe = /js\/app\.\s*(.*?)\s*\.js/g
-  let configId = await new Promise((resolve, reject) => {
-    Request.get({uri: frontendVersionUrl}, (error, response, body) => {
-      if (error)
-        reject(error);
-      resolve(body);
-    })
-  })
-  configId = configId.match(hashRe)[0]
-  let js = await new Promise((resolve, reject) => {
-    Request.get({uri: `${frontendVersionUrl}/${configId}`}, (error, response, body) => {
-      if (error)
-        reject(error);
-      resolve(body);
-    })
-  })
-  let version = js.matchAll(versionRe);
-  for (const match of version) {
-    version = match[1]
-    break
-  }
-  return version
+  return "v0.1.0"
 }
 
 export { getIssueId }
