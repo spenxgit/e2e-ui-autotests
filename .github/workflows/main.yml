@@ -17,7 +17,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 14
+        node-version: 16
 
     - name: Run TestCafe Tests
       uses: DevExpress/testcafe-action@latest
@@ -46,7 +46,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 14
+        node-version: 16
 
     - name: Download test artifacts
       uses: actions/download-artifact@v2
@@ -65,3 +65,5 @@ jobs:
         JIRA_BASE_URL: https://spenx.atlassian.net/
         JIRA_USER: im@spenxy.com
         JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORD }}
+        XRAY_CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
+        XRAY_CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
