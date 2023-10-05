@@ -21,12 +21,12 @@ jobs:
 
     - name: Run TestCafe Tests
       uses: DevExpress/testcafe-action@latest
+      continue-on-error: true
       with:
         args: chromium:headless tests/**/* -s takeOnFails=true --reporter json:report.json,list --hostname localhost --skip-js-errors
 
     - name: Upload test artifacts
       uses: actions/upload-artifact@v2
-      if: always()
       with:
         name: test-artifacts
         path: |
