@@ -60,3 +60,7 @@ jobs:
         node .github/jira-importer/app.js
       env:
         CI_BUILDS_DIR: ${{ github.workspace }}
+        JIRA_PROJECT_KEY: DEV
+        JIRA_BASE_URL: https://spenx.atlassian.net/
+        JIRA_USER: im@spenxy.com
+        JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORD }}
