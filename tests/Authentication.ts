@@ -11,7 +11,7 @@ fixture`Authentication`
         loginPage = await configurator.configure();
     });
 
-test('Login with valid credentials', async t => {
+test('DEV-504 Login with valid credentials', async t => {
     //steps
     let mainDashboardPage: MainDashboardPage = await loginPage.doLogin(Users.UserA);
 
@@ -19,7 +19,7 @@ test('Login with valid credentials', async t => {
     await t.expect(await mainDashboardPage.isPageLoaded()).eql(true);
 });
 
-test('Login attempt with invalid credentials', async t => {
+test('DEV-501 Login attempt with invalid credentials', async t => {
     //steps
     await loginPage.inputCredentials({email: Users.UserA.email, password: "Wrong Password"});
     loginPage = await loginPage.clickLogInButton(false);
