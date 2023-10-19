@@ -9,7 +9,7 @@ import MainDashboardPage from "../page_objects/MainDashboardPage";
 
 let loginPage;
 
-fixture`Authentication`
+fixture`Sign up`
     .page(TestConfigurator.getPlatformUrl())
     .beforeEach(async t => {
         let configurator = new TestConfigurator().isUserLoggedIn(false);
@@ -20,9 +20,7 @@ test('Sign up as a new user', async t => {
     //TODO дописать верификацию когда сайнап будет готов
 
     //generate new random email
-    let newUser: User = new User(TestUtils.getRandomEmailAddress(), TestUtils.getRandomPassword());
-    await console.log(newUser.email)
-    await console.log(newUser.password)
+    let newUser: User = new User(TestUtils.getRandomEmailAddress(),TestUtils.getRandomPassword());
 
     //sign up with a random email
     let signUpPage: SignUpPage = await loginPage.clickSignUpButton();

@@ -13,13 +13,11 @@ export default class TestUtils {
 
     static getRandomEmailAddress(): string {
         let generatedEmail = "autotest+" + uuidv4() + "@spenxy.com";
-        console.log("Generated email is: " + generatedEmail);
         return generatedEmail;
     }
 
     static getRandomPassword(): string {
         let generatedPassword = uuidv4();
-        console.log("Generated password is: " + generatedPassword);
         return generatedPassword;
     }
 }
