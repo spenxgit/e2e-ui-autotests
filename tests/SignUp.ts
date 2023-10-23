@@ -3,8 +3,6 @@ import {User, Users} from "../data/UsersData";
 import TestUtils from "../utils/TestUtils";
 import MailUtils from "../utils/MailUtils";
 import SignUpPage from "../page_objects/SignUpPage";
-import MainPage from "../page_objects/MainDashboardPage";
-import LoginPage from "../page_objects/LoginPage";
 import MainDashboardPage from "../page_objects/MainDashboardPage";
 
 let loginPage;
