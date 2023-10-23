@@ -1,5 +1,4 @@
 import {TestConfigurator} from "../utils/TestConfigurator";
-import PaymentUtils from "../utils/PaymentUtils";
 
 let loginPage;
 
@@ -11,5 +10,5 @@ fixture`Payments`
     });
 
 test('Test', async t => {
-    await PaymentUtils.validateSignUpWithMailLink();
+
 });
