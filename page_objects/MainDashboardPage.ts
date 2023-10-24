@@ -1,16 +1,19 @@
 import {t, Selector} from 'testcafe';
 import TestUtils from "../utils/TestUtils";
 import CardsPage from "./CardsPage";
+import CreateCardPage from "./CreateCardPage";
 
 export default class MainDashboardPage {
     private logo: Selector;
     private walletBalance: Selector;
     private cardPageNavButton: Selector;
+    private createCardPageNavButton: Selector;
 
     constructor() {
         this.logo = Selector('#Logo');
-        this.cardPageNavButton = Selector('.block-header-link-title').withText('Cards');
         this.walletBalance = Selector('.the-header-balance-amount');
+        this.cardPageNavButton = Selector('.block-header-link-title').withText('Cards');
+        this.createCardPageNavButton = Selector('[data-qa="app-menu-block-item-CARDS_CREATE"]');
     }
 
     async isPageLoaded(): Promise<boolean> {
@@ -24,6 +27,12 @@ export default class MainDashboardPage {
         //TODO это грязь, завалится, если юзер новый и у него еще не выпущенно ни одной карты
         await t.expect(Selector('ul.cards-list').exists).ok();
         return new CardsPage();
+    }
+
+    async clickOnCreateCardNavigationButton(): Promise<CreateCardPage> {
+        await t.click(this.createCardPageNavButton());
+        await t.expect(Selector('.create-card-page').exists).ok();
+        return new CreateCardPage();
     }
 
     async getWalletBalance(): Promise<number> {

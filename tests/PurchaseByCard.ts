@@ -2,7 +2,6 @@ import {TestConfigurator} from "../utils/TestConfigurator";
 import {Users} from "../data/UsersData";
 import StripeCheckoutPage from "../page_objects/StripeCheckoutPage";
 import CardsPage from "../page_objects/CardsPage";
-import {t} from "testcafe";
 
 let mainDashboardPage;
 let cardsPage;
@@ -37,7 +36,7 @@ test('Purchase by card', async t => {
     await t.expect(walletBalanceBeforePurchase).eql(walletBalanceAfterPurchase + 0);
 
 
-    //TODO добавить в валидацию реальные цифры отражающую затраты на покупку и комиссию
+    //TODO добавить в валидацию реальные цифры вместо нулей отражающие затраты на покупку и комиссию
     //TODO добавить выпуск карты если findFirstValidForPurchaseCard не возвращает карт
     //TODO добавить параметризацию в тест чтобы проверять покупку картой каждого БИНа
 });
