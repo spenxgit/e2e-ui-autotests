@@ -20,6 +20,20 @@ export default class TestUtils {
         let generatedPassword = uuidv4();
         return generatedPassword;
     }
+
+    static stringToNumberFormat(value: string, precision: number): number {
+        let tmp = Number(
+            value
+                .replace(/[^+\d]/g, '')
+        );
+
+        return TestUtils.roundNumber(tmp / 10 ** precision, precision);
+    }
+
+    static roundNumber(number: number, digits: number): number {
+        let multiple = Math.pow(10, digits);
+        return Math.round(number * multiple) / multiple;
+    }
 }
 
 

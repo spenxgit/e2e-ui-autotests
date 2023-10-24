@@ -1,4 +1,5 @@
 import {t, Selector} from 'testcafe';
+import TestUtils from "../utils/TestUtils";
 import CardsPage from "./CardsPage";
 
 export default class MainDashboardPage {
@@ -26,9 +27,9 @@ export default class MainDashboardPage {
     }
 
     async getWalletBalance(): Promise<number> {
-        const balanceText = await this.walletBalance.innerText;
-        const balance = parseFloat(balanceText);
-        console.log(balance)
-        return balance;
+        const selectorContent = await this.walletBalance;
+        const balanceNum = TestUtils.stringToNumberFormat(await selectorContent.textContent, 2);
+        console.log(balanceNum)
+        return balanceNum;
     }
 }
