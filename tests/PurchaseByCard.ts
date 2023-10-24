@@ -1,6 +1,7 @@
 import {TestConfigurator} from "../utils/TestConfigurator";
 import {Users} from "../data/UsersData";
 import StripeCheckoutPage from "../page_objects/StripeCheckoutPage";
+import CardsPage from "../page_objects/CardsPage";
 
 let mainDashboardPage;
 let cardsPage;
@@ -19,10 +20,18 @@ test('Purchase by card', async t => {
     let cardDetailsPage = await cardsPage.clickOnCard(cardForPurchase);
     let unmaskedCard = await cardDetailsPage.getUnmaskedCard();
 
+    let cardBalanceBeforePurchase = await cardDetailsPage.getCardBalance();
+    let walletBalanceBeforePurchase = await mainDashboardPage.getWalletBalance();
+
     let stripeCheckoutPage = await StripeCheckoutPage.navigateToStripe();
     await stripeCheckoutPage.makeAPurchase(unmaskedCard);
 
-    //TODO вернуться на страницу карты
-    //TODO свалидировать изменение суммы на кошельке и на карте после операции
+    cardsPage = await CardsPage.navigateToCardsPage();
+    cardDetailsPage = await cardsPage.clickOnCard(cardForPurchase);
+    let cardBalanceAfterPurchase = await cardDetailsPage.getCardBalance();
+    let walletBalanceAfterPurchase = await mainDashboardPage.getWalletBalance();
+
+    //TODO добавить выпуск карты если findFirstValidForPurchaseCard не возвращает карт
+    //TODO добавить параметризацию в тест чтобы проверять покупку картой каждого БИНа
 });
 

@@ -1,4 +1,3 @@
-
 export class Card {
     cardNickName: string;
     cardBalance: string;
@@ -8,5 +7,4 @@ export class Card {
     cardCVV: string;
     cardUser: string;
     cardStatus: string;
-
 }

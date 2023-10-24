@@ -7,13 +7,15 @@ export default class CardDetailsPage {
     private cardNumber: Selector;
     private cardExpDate: Selector;
     private cardCVV: Selector;
+    private cardBalance: Selector;
 
     constructor() {
         this.cardSecureDetailsButton = Selector('.card-security-details-action-button');
         this.cardUser = Selector('.app-definition-list-group .app-definition-list:nth-child(1) .app-definition-list-item-description');
         this.cardNumber = Selector('.app-definition-list-group .app-definition-list:nth-child(2) .app-definition-list-item-description');
-        this.cardExpDate= Selector('.app-definition-list-group .app-definition-list:nth-child(3) .app-definition-list-item-description');
-        this.cardCVV= Selector('.app-definition-list-group .app-definition-list:nth-child(4) .app-definition-list-item-description');
+        this.cardExpDate = Selector('.app-definition-list-group .app-definition-list:nth-child(3) .app-definition-list-item-description');
+        this.cardCVV = Selector('.app-definition-list-group .app-definition-list:nth-child(4) .app-definition-list-item-description');
+        this.cardBalance = Selector('.actions-header-details-balance');
     }
 
     async getUnmaskedCard(): Promise<Card> {
@@ -24,5 +26,12 @@ export default class CardDetailsPage {
         unmaskedCard.cardExpDate = await Selector(this.cardExpDate).textContent;
         unmaskedCard.cardCVV = await Selector(this.cardCVV).textContent;
         return unmaskedCard;
+    }
+
+    async getCardBalance(): Promise<number> {
+        const balanceText = await this.cardBalance.innerText;
+        const balance = parseFloat(balanceText);
+        console.log(balance)
+        return balance;
     }
 }

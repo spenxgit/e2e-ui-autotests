@@ -3,11 +3,13 @@ import CardsPage from "./CardsPage";
 
 export default class MainDashboardPage {
     private logo: Selector;
+    private walletBalance: Selector;
     private cardPageNavButton: Selector;
 
     constructor() {
         this.logo = Selector('#Logo');
         this.cardPageNavButton = Selector('.block-header-link-title').withText('Cards');
+        this.walletBalance = Selector('.the-header-balance-amount');
     }
 
     async isPageLoaded(): Promise<boolean> {
@@ -21,5 +23,12 @@ export default class MainDashboardPage {
         //TODO это грязь, завалится, если юзер новый и у него еще не выпущенно ни одной карты
         await t.expect(Selector('ul.cards-list').exists).ok();
         return new CardsPage();
+    }
+
+    async getWalletBalance(): Promise<number> {
+        const balanceText = await this.walletBalance.innerText;
+        const balance = parseFloat(balanceText);
+        console.log(balance)
+        return balance;
     }
 }

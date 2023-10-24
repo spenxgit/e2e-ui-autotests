@@ -3,14 +3,20 @@ import {Card} from "../models/Cards";
 import CardDetailsPage from "./CardDetailsPage";
 
 export default class CardsPage {
+    static cardsPageURL = 'https://wlspenxy.dev.apps.spenxy.com/cards';
     private cardsTable: Selector;
     private card: Selector;
     private cardsArray: Card[] = [];
 
-
     constructor() {
         this.cardsTable = Selector('#cards-list');
         this.card = Selector('#app-bank-card')
+    }
+
+    static async navigateToCardsPage(): Promise<CardsPage> {
+        await t.setNativeDialogHandler(() => true)
+        await t.navigateTo(CardsPage.cardsPageURL);
+        return new CardsPage();
     }
 
     async getCardsList(): Promise<Card[]> {
@@ -31,7 +37,7 @@ export default class CardsPage {
     async findFirstValidForPurchaseCard(cards): Promise<Card> {
         for (let i = 0; i < cards.length; i++) {
             const card = cards[i];
-            if (card.cardStatus === '' && parseFloat(card.cardBalance.replace(',', '.')) > 10.00) {
+            if (card.cardStatus === '' && parseFloat(card.cardBalance.replace(',', '.')) > 1.50) {
                 return card;
             }
         }
