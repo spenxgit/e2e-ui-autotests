@@ -15,8 +15,6 @@ fixture`Sign up`
     });
 
 test('Sign up as a new user', async t => {
-    //TODO дописать верификацию когда сайнап будет готов
-
     //generate new random email
     let newUser: User = new User(TestUtils.getRandomEmailAddress(),TestUtils.getRandomPassword());
 
@@ -28,4 +26,6 @@ test('Sign up as a new user', async t => {
     //validation
     await t.navigateTo(TestConfigurator.platformUrl);
     let mainDashboardPage: MainDashboardPage = await loginPage.doLogin(newUser);
+
+    //TODO дописать верификацию когда сайнап будет готов
 });

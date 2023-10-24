@@ -1,21 +1,23 @@
 import {Selector, t} from 'testcafe';
-import {CardsArray} from "../models/Cards";
+import {Card} from "../models/Cards";
+import CardDetailsPage from "./CardDetailsPage";
 
 export default class CardsPage {
     private cardsTable: Selector;
     private card: Selector;
-    private cardsArray: CardsArray[] = [];
+    private cardsArray: Card[] = [];
+
 
     constructor() {
         this.cardsTable = Selector('#cards-list');
         this.card = Selector('#app-bank-card')
     }
 
-    async getCardsList(): Promise<CardsArray[]> {
+    async getCardsList(): Promise<Card[]> {
         let cardSelector = await Selector('.app-bank-card')
         this.cardsArray = [];
         for (let i = 0; i < await cardSelector.count; i++) {
-            let cardExample = new CardsArray();
+            let cardExample = new Card();
             cardExample.cardNickName = (await cardSelector.nth(i).find('.card-header-holder').textContent);
             cardExample.cardBalance = (await cardSelector.nth(i).find('.card-header-balance-value').textContent);
             cardExample.cardMaskedNumber = (await cardSelector.nth(i).find('.app-bank-card-number').textContent);
@@ -23,7 +25,21 @@ export default class CardsPage {
             cardExample.cardStatus = (await cardSelector.nth(i).find('.card-header-meta').textContent);
             this.cardsArray.push(cardExample);
         }
-        console.log(this.cardsArray);
         return this.cardsArray;
+    }
+
+    async findFirstValidForPurchaseCard(cards): Promise<Card> {
+        for (let i = 0; i < cards.length; i++) {
+            const card = cards[i];
+            if (card.cardStatus === '' && parseFloat(card.cardBalance.replace(',', '.')) > 10.00) {
+                return card;
+            }
+        }
+        return null;
+    }
+
+    async clickOnCard(card): Promise<CardDetailsPage> {
+        await t.click(Selector('.app-bank-card-number').withText(card.cardMaskedNumber));
+        return new CardDetailsPage();
     }
 }

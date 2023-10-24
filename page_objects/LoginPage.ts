@@ -11,11 +11,11 @@ export default class LoginPage {
     private signUpButton: Selector;
 
     constructor() {
-        this.emailInputField = Selector('#email', {timeout: 10000});
-        this.passwordInputField = Selector('#password', {timeout: 10000});
-        this.logInButton = Selector('button.button[type="submit"]', {timeout: 10000}).withText('Log in');
-        this.loginErrorMessage = Selector('.app-error-modal-content-text', {timeout: 10000});
-        this.signUpButton = Selector('.card-footer-button', {timeout: 10000}).withText('Sign up');
+        this.emailInputField = Selector('#email');
+        this.passwordInputField = Selector('#password');
+        this.logInButton = Selector('button.button[type="submit"]').withText('Log in');
+        this.loginErrorMessage = Selector('.app-error-modal-content-text');
+        this.signUpButton = Selector('.card-footer-button').withText('Sign up');
     }
 
     async doLogin({email, password}): Promise<MainDashboardPage> {

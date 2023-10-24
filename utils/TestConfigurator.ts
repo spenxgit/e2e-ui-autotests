@@ -1,3 +1,4 @@
+import {User} from "../data/UsersData";
 import LoginPage from "../page_objects/LoginPage";
 import MainDashboardPage from "../page_objects/MainDashboardPage";
 
@@ -13,6 +14,11 @@ export class TestConfigurator {
 
     static getPlatformUrl(): string {
         return this.platformUrl;
+    }
+
+    setTestUser(user: User): TestConfigurator {
+        this.testUser = user;
+        return this;
     }
 
     isUserLoggedIn(isLoggedIn: boolean): TestConfigurator {

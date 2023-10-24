@@ -1,7 +1,7 @@
 import {t, Selector} from 'testcafe';
 import CardsPage from "./CardsPage";
 
-export default class MainPage {
+export default class MainDashboardPage {
     private logo: Selector;
     private cardPageNavButton: Selector;
 
@@ -19,7 +19,7 @@ export default class MainPage {
     async clickOnCardsNavigationButton(): Promise<CardsPage> {
         await t.click(this.cardPageNavButton);
         //TODO это грязь, завалится, если юзер новый и у него еще не выпущенно ни одной карты
-        await t.expect(Selector('ul.cards-list').exists).ok({ timeout: 10000 });
+        await t.expect(Selector('ul.cards-list').exists).ok();
         return new CardsPage();
     }
 }
