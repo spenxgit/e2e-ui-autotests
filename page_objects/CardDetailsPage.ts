@@ -31,7 +31,6 @@ export default class CardDetailsPage {
     async getCardBalance(): Promise<number> {
         const balanceText = await this.cardBalance.innerText;
         const balance = parseFloat(balanceText);
-        console.log(balance)
         return balance;
     }
 }

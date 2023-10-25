@@ -13,9 +13,14 @@ fixture`Create card`
     });
 
 test('Create card with 54054200 BIN', async t => {
+
     let bin = '54054200';
-    let cardUser = '';
-    let cardNickname ='';
+    let cardUser = Users.UserA.email;
+    let cardNickname = 'Autotest';
     let maxTransactionLimit = '';
+
+    let walletBalanceBeforeCardCreation = mainDashboardPage.getWalletBalance();
     await createCardPage.createCard(bin, cardUser, cardNickname, maxTransactionLimit);
+
+    //TODO валидация
 });

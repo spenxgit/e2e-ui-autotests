@@ -14,7 +14,7 @@ fixture`Purchase by card`
         cardsPage = await mainDashboardPage.clickOnCardsNavigationButton();
     });
 
-test('Purchase by card', async t => {
+test('DEV-169 Purchase by card', async t => {
     let cardsArray = await cardsPage.getCardsList();
     let cardForPurchase = await cardsPage.findFirstValidForPurchaseCard(cardsArray);
     let cardDetailsPage = await cardsPage.clickOnCard(cardForPurchase);
@@ -38,6 +38,7 @@ test('Purchase by card', async t => {
 
     //TODO добавить в валидацию реальные цифры вместо нулей отражающие затраты на покупку и комиссию
     //TODO добавить выпуск карты если findFirstValidForPurchaseCard не возвращает карт
+    //TODO парамаетризировать сумму покупки
     //TODO добавить параметризацию в тест чтобы проверять покупку картой каждого БИНа
 });
 

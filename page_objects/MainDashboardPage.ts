@@ -38,7 +38,6 @@ export default class MainDashboardPage {
     async getWalletBalance(): Promise<number> {
         const selectorContent = await this.walletBalance;
         const balanceNum = TestUtils.stringToNumberFormat(await selectorContent.textContent, 2);
-        console.log(balanceNum)
         return balanceNum;
     }
 }

@@ -8,6 +8,26 @@ export default class CreateCardPage {
     }
 
     async createCard(bin, cardUser, cardNickname, maxTransactionLimit) {
+        await this.clickOnTheBIN(bin);
+        await this.selectCardUser(cardUser);
+        await this.setCardNickName(cardNickname);
+        await this.setMaxTransactionLimit(maxTransactionLimit);
+    }
+
+    async clickOnTheBIN(bin) {
+        const createCardButton = Selector('tr').withText(bin).find('button').withText('Create card');
+        await t.click(createCardButton);
+    }
+
+    async selectCardUser(cardUser) {
+
+    }
+
+    async setCardNickName(cardNickname) {
+
+    }
+
+    async setMaxTransactionLimit(maxTransactionLimit) {
 
     }
 }
