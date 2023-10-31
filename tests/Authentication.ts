@@ -2,7 +2,7 @@ import {TestConfigurator} from "../utils/TestConfigurator";
 import {Users} from "../data/UsersData";
 import MainDashboardPage from "../page_objects/MainDashboardPage";
 import CardsPage from "../page_objects/CardsPage";
-import {CardsArray} from "../models/Cards";
+import {Card} from "../models/Cards";
 
 let loginPage;
 
@@ -34,5 +34,5 @@ test('Temporary', async t => {
     //steps
     let mainDashboardPage: MainDashboardPage = await loginPage.doLogin(Users.UserA);
     let cardsPage: CardsPage = await mainDashboardPage.clickOnCardsNavigationButton();
-    let [cardsArray]: CardsArray[] = await cardsPage.getCardsList();
+    let [cardsArray]: Card[] = await cardsPage.getCardsList();
 })
