@@ -17,11 +17,12 @@ export default class SignUpPage {
         this.signUpButton = Selector('button.button[type="submit"]', {timeout: 10000}).withText('Sign up');
     }
 
-    async fillSignUpData(firstName, lastName, email, password) {
-        await TestUtils.typeTextInTextField(firstName, this.firstNameInputField);
-        await TestUtils.typeTextInTextField(lastName, this.lastNameInputField);
+    async fillAndSubmitSignUpData(firstName, lastName, email, password) {
+        //await TestUtils.typeTextInTextField(firstName, this.firstNameInputField);
+        //await TestUtils.typeTextInTextField(lastName, this.lastNameInputField);
         await TestUtils.typeTextInTextField(email, this.emailInputField);
         await TestUtils.typeTextInTextField(password, this.passwordInputField)
+        //TODO кликнуть по кнопке сайнапа, когда будет готова интеграция бека с фронтом
     }
 
     async

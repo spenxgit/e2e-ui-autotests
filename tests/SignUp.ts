@@ -20,12 +20,12 @@ test('Sign up as a new user', async t => {
 
     //sign up with a random email
     let signUpPage: SignUpPage = await loginPage.clickSignUpButton();
-    await signUpPage.fillSignUpData('Auto', 'Test', newUser.email, newUser.password)
+    await signUpPage.fillAndSubmitSignUpData('Auto', 'Test', newUser.email, newUser.password)
     await MailUtils.validateSignUpWithMailLink(Users.UserA);
 
     //validation
     await t.navigateTo(TestConfigurator.platformUrl);
     let mainDashboardPage: MainDashboardPage = await loginPage.doLogin(newUser);
 
-    //TODO дописать верификацию когда сайнап будет готов
+    //TODO дописать валидацию когда сайнап будет готов
 });
